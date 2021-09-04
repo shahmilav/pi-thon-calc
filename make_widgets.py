@@ -14,6 +14,13 @@ def on_click(lbl_screen, value):
 
     lbl_screen["text"] = EXPRESSION
 
+def on_key_press(lbl_screen, event):
+    """DSTRING."""
+    global EXPRESSION
+    EXPRESSION += str(event.char)
+
+    lbl_screen["text"] = EXPRESSION
+
 
 def clear(lbl_screen):
     """DSTRING."""
@@ -32,8 +39,7 @@ def delete(lbl_screen):
 def enter(lbl_screen):
     """DSTR."""
     global EXPRESSION
-    EXPRESSION.replace('²', '**2')
-    
+
     # Catch ZeroDivisionError:
     try:
         EXPRESSION = str(eval(EXPRESSION))
@@ -41,7 +47,7 @@ def enter(lbl_screen):
             EXPRESSION = EXPRESSION[:-2]
         lbl_screen["text"] = EXPRESSION
     except ZeroDivisionError:
-        lbl_screen["text"] = "ZeroDivision Error"
+        lbl_screen["text"] = "Zero Division Error"
     except SyntaxError:
         lbl_screen["text"] = "Syntax Error"
 
@@ -49,7 +55,7 @@ def enter(lbl_screen):
 def set_up_all(root):
     """Set up all widgets."""
     lbl_screen = tk.Label(root, text="", relief=GROOVE, justify=LEFT,
-                          wraplength=210)
+                          wraplength=210, bg='#e7f5fe')
     lbl_screen["font"] = 'Courier 30'
     lbl_screen.grid(row=0, columnspan=4, sticky=NSEW)
 
@@ -57,6 +63,15 @@ def set_up_all(root):
         """Set up buttons so I do not have to do them individually."""
         # Set Up:
         my_font = font.Font(family='Courier 20 bold')
+
+
+        if button_id == 'zero':
+            button = tk.Button(master=root, text=name, relief=RAISED,
+                               command=lambda: on_click(lbl_screen,
+                                                        button["text"]),
+                               height=2)
+            button.grid(row=row, column=column, columnspan=2, sticky=NSEW)
+
         if button_id == 'numerical':
             button = tk.Button(master=root, text=name, relief=RAISED,
                                command=lambda: on_click(lbl_screen,
@@ -90,14 +105,18 @@ def set_up_all(root):
 
         if button_id == 'pi':
             button = tk.Button(master=root, text=name, relief=RAISED,
-                               command=lambda: on_click(lbl_screen, '3.141592'),
+                               command=lambda: on_click(
+                                   lbl_screen, '3.141592'),
                                height=2)
+        button.configure(highlightthickness=2)
         button.grid(row=row, column=column, sticky=NSEW)
         button['font'] = my_font
 
     # Button 0.
     btn_zero = tk.Button()
-    btn_set_up(btn_zero, '0', 6, 0, root)
+    btn_zero.grid(columnspan=2)
+    btn_set_up(btn_zero, '0', 6, 0, root, 'zero')
+    btn_zero.bind("0", lambda: on_key_press(lbl_screen))
 
     # Button 1.
     btn_one = tk.Button()
@@ -153,11 +172,7 @@ def set_up_all(root):
 
     # Decimal point.
     btn_decimal = tk.Button()
-    btn_set_up(btn_decimal, '.', 6, 1, root)
-
-    # Positive/Negative button.
-    btn_posneg = tk.Button()
-    btn_set_up(btn_posneg, '+/-', 6, 2, root)
+    btn_set_up(btn_decimal, '.', 6, 2, root)
 
     # Square.
     btn_square = tk.Button()
