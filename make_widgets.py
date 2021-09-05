@@ -1,21 +1,30 @@
 """Set up widgets, event handlers."""
 import tkinter as tk
 from tkinter import font
-from tkinter.constants import GROOVE, LEFT, NSEW, RAISED
-from math import sqrt, pi
+from tkinter.constants import CENTER, LEFT, NSEW, RAISED, SUNKEN
+from math import sqrt
 
 EXPRESSION = ""
 
 
 def on_click(lbl_screen, value):
-    """DSTRING."""
+    """Append string.
+
+    For any numerical, operational, or functional button, appends the value of
+    the button to the string. This is for clicking buttons.
+    """
     global EXPRESSION
     EXPRESSION += value
 
     lbl_screen["text"] = EXPRESSION
 
+
 def on_key_press(lbl_screen, event):
-    """DSTRING."""
+    """Append string.
+
+    For any numerical, operational, or functional button, appends the value of
+    the button to the string. This is for keyboard keys. WIP.
+    """
     global EXPRESSION
     EXPRESSION += str(event.char)
 
@@ -23,47 +32,59 @@ def on_key_press(lbl_screen, event):
 
 
 def clear(lbl_screen):
-    """DSTRING."""
+    """When the 'clear' button is clicked.
+
+    Clears the screen, and string.
+    """
     global EXPRESSION
     EXPRESSION = ""
     lbl_screen["text"] = EXPRESSION
 
 
 def delete(lbl_screen):
-    """DSTR."""
+    """When the 'delete' button is clicked.
+
+    Deletes the last added character from the string.
+    """
     global EXPRESSION
     EXPRESSION = EXPRESSION[:-1]
     lbl_screen["text"] = EXPRESSION
 
 
 def enter(lbl_screen):
-    """DSTR."""
-    global EXPRESSION
+    """When the '=' button is clicked.
 
-    # Catch ZeroDivisionError:
+    Evaluates the expression and displays result.
+    """
+    global EXPRESSION
+    EXPRESSION.replace('²', '**2')
+
+    # Catch ZeroDivisionError, SyntaxError:
     try:
         EXPRESSION = str(eval(EXPRESSION))
         if EXPRESSION[-1] == '0' and EXPRESSION[-2] == '.':
             EXPRESSION = EXPRESSION[:-2]
         lbl_screen["text"] = EXPRESSION
+
     except ZeroDivisionError:
         lbl_screen["text"] = "Zero Division Error"
+
     except SyntaxError:
         lbl_screen["text"] = "Syntax Error"
+    lbl_screen["justify"] = CENTER
 
 
 def set_up_all(root):
     """Set up all widgets."""
-    lbl_screen = tk.Label(root, text="", relief=GROOVE, justify=LEFT,
-                          wraplength=210, bg='#e7f5fe')
-    lbl_screen["font"] = 'Courier 30'
+    lbl_screen = tk.Label(root, text="", relief=SUNKEN, justify=LEFT,
+                          wraplength=250, bg='#e7f5fe')
+    lbl_screen["font"] = 'Courier 25'
     lbl_screen.grid(row=0, columnspan=4, sticky=NSEW)
 
     def btn_set_up(button, name, row, column, root, button_id="numerical"):
         """Set up buttons so I do not have to do them individually."""
         # Set Up:
         my_font = font.Font(family='Courier 20 bold')
-
 
         if button_id == 'zero':
             button = tk.Button(master=root, text=name, relief=RAISED,
@@ -76,6 +97,18 @@ def set_up_all(root):
             button = tk.Button(master=root, text=name, relief=RAISED,
                                command=lambda: on_click(lbl_screen,
                                                         button["text"]),
+                               height=2)
+
+        if button_id == 'multiply':
+            button = tk.Button(master=root, text=name, relief=RAISED,
+                               command=lambda: on_click(lbl_screen,
+                                                        "*"),
+                               height=2)
+
+        if button_id == 'divide':
+            button = tk.Button(master=root, text=name, relief=RAISED,
+                               command=lambda: on_click(lbl_screen,
+                                                        "/"),
                                height=2)
 
         if button_id == 'clear':
@@ -108,15 +141,14 @@ def set_up_all(root):
                                command=lambda: on_click(
                                    lbl_screen, '3.141592'),
                                height=2)
-        button.configure(highlightthickness=2)
+
+        button.configure(highlightthickness=3, font=my_font)
         button.grid(row=row, column=column, sticky=NSEW)
-        button['font'] = my_font
 
     # Button 0.
     btn_zero = tk.Button()
     btn_zero.grid(columnspan=2)
     btn_set_up(btn_zero, '0', 6, 0, root, 'zero')
-    btn_zero.bind("0", lambda: on_key_press(lbl_screen))
 
     # Button 1.
     btn_one = tk.Button()
@@ -164,11 +196,11 @@ def set_up_all(root):
 
     # Times sign.
     btn_times = tk.Button()
-    btn_set_up(btn_times, '*', 3, 3, root)
+    btn_set_up(btn_times, 'x', 3, 3, root, 'multiply')
 
     # Division sign.
     btn_divide = tk.Button()
-    btn_set_up(btn_divide, '/', 2, 3, root)
+    btn_set_up(btn_divide, '÷', 2, 3, root, 'divide')
 
     # Decimal point.
     btn_decimal = tk.Button()
@@ -205,4 +237,4 @@ def set_up_all(root):
 
     # Delete.
     btn_delete = tk.Button()
-    btn_set_up(btn_delete, 'DELETE', 1, 3, root, button_id='delete')
+    btn_set_up(btn_delete, ' DEL ', 1, 3, root, button_id='delete')
