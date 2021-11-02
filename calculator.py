@@ -1,13 +1,21 @@
-"""module docstring."""
+"""This module has the Calculator class."""
 import tkinter as tk
 from make_widgets import set_up_all
 
 
 class Calculator:
-    """Calculator class."""
+    """Sets up the calculator.
+
+    Run this file to run the calculator.
+    """
+
+    # TODO:
+    # Make square (x²) work. (x**2)
+    # Change font sizes and families.
+    # Make keyboard input work
 
     root = tk.Tk()
-    root.configure(bg="red")
+    root.configure(background="red")
 
     # Configuring window
     root.title("\N{GREEK SMALL LETTER PI}-thon Calculator")
@@ -18,8 +26,3 @@ class Calculator:
     root.columnconfigure([0, 1, 2], minsize=50, weight=1)
     set_up_all(root)
     root.mainloop()
-
-    # TODO:
-    # Make square (x^2) work. (x**2)
-    # Change font sizes and families.
-    # Make keyboard input work

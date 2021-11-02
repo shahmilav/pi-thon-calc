@@ -2,7 +2,7 @@
 import tkinter as tk
 from tkinter import font
 from tkinter.constants import CENTER, LEFT, NSEW, RAISED, SUNKEN
-from math import sqrt
+from math import sqrt, pi
 
 EXPRESSION = ""
 
@@ -57,7 +57,9 @@ def enter(lbl_screen):
     Evaluates the expression and displays result.
     """
     global EXPRESSION
-    EXPRESSION.replace('²', '**2')
+    EXPRESSION = EXPRESSION.replace('²', '**2')
+    EXPRESSION = EXPRESSION.replace('\N{GREEK SMALL LETTER PI}', 'pi')
+    EXPRESSION = EXPRESSION.replace('√', 'sqrt')
 
     # Catch ZeroDivisionError, SyntaxError:
     try:
@@ -73,6 +75,10 @@ def enter(lbl_screen):
         lbl_screen["text"] = "Syntax Error"
     lbl_screen["justify"] = CENTER
 
+    EXPRESSION = EXPRESSION.replace('**2', '²')
+    EXPRESSION = EXPRESSION.replace('pi', '\N{GREEK SMALL LETTER PI}')
+    EXPRESSION = EXPRESSION.replace('sqrt', '√')
+
 
 def set_up_all(root):
     """Set up all widgets."""
@@ -81,10 +87,9 @@ def set_up_all(root):
     lbl_screen["font"] = 'Courier 25'
     lbl_screen.grid(row=0, columnspan=4, sticky=NSEW)
 
-    def btn_set_up(button, name, row, column, root, button_id="numerical"):
+    def btn_set_up(button, name, row, column, root, button_id="num"):
         """Set up buttons so I do not have to do them individually."""
-        # Set Up:
-        my_font = font.Font(family='Courier 20 bold')
+        my_font = font.Font(family='Helvetica', size=14)
 
         if button_id == 'zero':
             button = tk.Button(master=root, text=name, relief=RAISED,
@@ -93,7 +98,7 @@ def set_up_all(root):
                                height=2)
             button.grid(row=row, column=column, columnspan=2, sticky=NSEW)
 
-        if button_id == 'numerical':
+        if button_id == 'num':
             button = tk.Button(master=root, text=name, relief=RAISED,
                                command=lambda: on_click(lbl_screen,
                                                         button["text"]),
@@ -133,13 +138,7 @@ def set_up_all(root):
 
         if button_id == 'sqrt':
             button = tk.Button(master=root, text=name, relief=RAISED,
-                               command=lambda: on_click(lbl_screen, 'sqrt('),
-                               height=2)
-
-        if button_id == 'pi':
-            button = tk.Button(master=root, text=name, relief=RAISED,
-                               command=lambda: on_click(
-                                   lbl_screen, '3.141592'),
+                               command=lambda: on_click(lbl_screen, '√('),
                                height=2)
 
         button.configure(highlightthickness=3, font=my_font)
@@ -208,16 +207,16 @@ def set_up_all(root):
 
     # Square.
     btn_square = tk.Button()
-    btn_set_up(btn_square, 'x²', 2, 0, root, button_id='square')
+    btn_set_up(btn_square, 'x²', 2, 0, root, 'square')
 
     # Square Root
     btn_sqrt = tk.Button()
-    btn_set_up(btn_sqrt, '√', 2, 1, root, button_id='sqrt')
+    btn_set_up(btn_sqrt, '√', 2, 1, root, 'sqrt')
 
     # Pi.
     btn_pi = tk.Button()
     btn_set_up(btn_pi, '\N{GREEK SMALL LETTER PI}', 2, 2,
-               root, button_id='pi')
+               root)
 
     # Clear.
     btn_clear = tk.Button()
