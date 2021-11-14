@@ -10,7 +10,6 @@ class Calculator:
     """
 
     # TODO:
-    # Make square (x²) work. (x**2)
     # Change font sizes and families.
     # Make keyboard input work
 
