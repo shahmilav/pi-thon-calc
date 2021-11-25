@@ -9,19 +9,18 @@ class Calculator:
     Run this file to run the calculator.
     """
 
-    # TODO:
+    # TODO =>>
     # Change font sizes and families.
     # Make keyboard input work
 
-    root = tk.Tk()
-    root.configure(background="red")
+    root = tk.Tk()  # <- initialize window.
 
-    # Configuring window
-    root.title("\N{GREEK SMALL LETTER PI}-thon Calculator")
-    root.resizable(False, False)
-    root.minsize(260, 350)
-    root.maxsize(260, 350)
-    root.rowconfigure(0, minsize=50, weight=1)
-    root.columnconfigure([0, 1, 2], minsize=50, weight=1)
-    set_up_all(root)
-    root.mainloop()
+    # Configuring window ==>
+    root.title("\N{GREEK SMALL LETTER PI}-thon Calculator")  # <- set title.
+    root.resizable(False, False)  # <- set window to non-resizable.
+    root.geometry("260x350")  # <- set window size.
+    root.rowconfigure(0, minsize=50, weight=1)  # <- set rows for buttons.
+    root.columnconfigure([0, 1, 2], minsize=50, weight=1)  # <- set columns.
+    root.configure(background="red")  # <- set window background.
+    set_up_all(root)  # <- sets up all widgets, buttons, etc.
+    root.mainloop()  # <- it's showtime!
