@@ -8,7 +8,7 @@ EXPRESSION = ""
 
 
 def on_click(lbl_screen, value):
-    """Append string.
+    """Append string on button click.
 
     For any numerical, operational, or functional button, appends the value of
     the button to the string. This is for clicking buttons.
