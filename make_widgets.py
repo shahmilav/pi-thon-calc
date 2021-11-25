@@ -58,7 +58,8 @@ def enter(lbl_screen):
     Evaluates the expression and displays result.
     """
     global EXPRESSION
-    EXPRESSION = EXPRESSION.replace("²", "**2")  # <- replace instances of '²' with **2.
+    # replace instances of '²' with **2 -->
+    EXPRESSION = EXPRESSION.replace("²", "**2")
     EXPRESSION = EXPRESSION.replace(
         "\N{GREEK SMALL LETTER PI}", "pi"
     )  # <- replace pi symbol with 'pi'
@@ -81,7 +82,8 @@ def enter(lbl_screen):
         lbl_screen["text"] = "Syntax Error"
     lbl_screen["justify"] = CENTER
 
-    EXPRESSION = EXPRESSION.replace("²", "**2")  # <- replace instances of '²' with **2.
+    # replace instances of '²' with **2 ->
+    EXPRESSION = EXPRESSION.replace("²", "**2")
     EXPRESSION = EXPRESSION.replace(
         "\N{GREEK SMALL LETTER PI}", "pi"
     )  # <- replace pi symbol with 'pi'
@@ -92,11 +94,17 @@ def set_up_all(root):
     """Set up all widgets."""
     # Set up the screen (display) ==>
     lbl_screen = tk.Label(  # basic configuration -->
-        root, text="", relief=SUNKEN, justify=LEFT, wraplength=250, bg="#e7f5fe"
+        master=root,  # add widget to window.
+        text="",  # set widget text.
+        relief=SUNKEN,  # set widget relief.
+        justify=LEFT,  # justify widget on left side.
+        wraplength=250,  # set widget wraplength.
+        bg="#e7f5fe"  # set widget background.
     )
 
     lbl_screen["font"] = "Courier 25"  # <- change font.
-    lbl_screen.grid(row=0, columnspan=4, sticky=NSEW)  # <- assign widget spot on grid.
+    # assign widget spot on grid -->
+    lbl_screen.grid(row=0, columnspan=4, sticky=NSEW)
 
     def btn_set_up(button, name, row, column, root, button_id="num"):
         """Set up buttons so I do not have to do them individually."""
@@ -124,7 +132,7 @@ def set_up_all(root):
                 height=2,  # set button height.
             )
 
-        if button_id == "multiply":  # if the button is the times (*) button ==>
+        if button_id == "multiply":  # if button is the times (*) button ==>
             button = tk.Button(
                 master=root,  # add button to window.
                 text=name,  # set button text as name.
