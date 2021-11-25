@@ -129,7 +129,7 @@ def set_up_all(root):
                 master=root,  # add button to window.
                 text=name,  # set button text as name.
                 relief=RAISED,  # set button relief.
-                # on click command ==>
+                # on click command =>
                 command=lambda: on_click(lbl_screen, "*"),
                 height=2,  # set button height.
             )
@@ -139,7 +139,7 @@ def set_up_all(root):
                 master=root,  # add button to window.
                 text=name,  # set button text as name.
                 relief=RAISED,  # set button relief.
-                # on click command ==>
+                # on click command =>
                 command=lambda: on_click(lbl_screen, "/"),
                 height=2,  # set button height.
             )
@@ -154,49 +154,58 @@ def set_up_all(root):
                 height=2,  # set button height.
             )
 
-        if button_id == "delete":
+        if button_id == "delete":  # if button is the delete button ==>
             button = tk.Button(
-                master=root,
-                text=name,
-                relief=RAISED,
+                master=root,  # add button to window.
+                text=name,  # set button text as name.
+                relief=RAISED,  # set button relief.
+                # on click command =>
                 command=lambda: delete(lbl_screen),
-                height=2,
+                height=2,  # set button height.
             )
 
-        if button_id == "enter":
+        if button_id == "enter":  # if button is the enter button ==>
             button = tk.Button(
-                master=root,
-                text=name,
-                relief=RAISED,
+                master=root,  # add button to window.
+                text=name,  # set button text as name.
+                relief=RAISED,  # set button relief.
+                # on click command =>
                 command=lambda: enter(lbl_screen),
-                height=2,
+                height=2,  # set button height.
             )
 
-        if button_id == "square":
+        if button_id == "square":  # if button is the ² button (^2) ==>
             button = tk.Button(
-                master=root,
-                text=name,
-                relief=RAISED,
+                master=root,  # add button to window.
+                text=name,  # set button text as name.
+                relief=RAISED,  # set button relief.
+                # on click command =>
                 command=lambda: on_click(lbl_screen, "²"),
-                height=2,
+                height=2,  # set button height.
             )
 
-        if button_id == "sqrt":
+        if button_id == "sqrt":  # if button is the √ button (sqrt) ==>
             button = tk.Button(
-                master=root,
-                text=name,
-                relief=RAISED,
+                master=root,  # add button to window.
+                text=name,  # set button text as name.
+                relief=RAISED,  # set button relief.
+                # on click command =>
                 command=lambda: on_click(lbl_screen, "√("),
-                height=2,
+                height=2,  # set button height.
             )
 
+        # for all buttons => set font, highlightthickness, and grid location.
         button.configure(highlightthickness=3, font=my_font)
         button.grid(row=row, column=column, sticky=NSEW)
 
+    # Initializing Buttons ==>
+    # this part is mostly repetitive, therefore I will only comment
+    # for Button 0.
+
     # Button 0.
-    btn_zero = tk.Button()
-    btn_zero.grid(columnspan=2)
-    btn_set_up(btn_zero, "0", 6, 0, root, "zero")
+    btn_zero = tk.Button()  # initialize button.
+    btn_zero.grid(columnspan=2)  # have button take up 2 columns.
+    btn_set_up(btn_zero, "0", 6, 0, root, "zero")  # send info to btn_set_up.
 
     # Button 1.
     btn_one = tk.Button()
