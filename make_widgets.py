@@ -14,8 +14,8 @@ def on_click(lbl_screen, value):
     the button to the string. This is for clicking buttons.
     """
     global EXPRESSION
-    EXPRESSION += value
-    lbl_screen["text"] = EXPRESSION
+    EXPRESSION += value  # <- append user_input to global value EXPRESSION.
+    lbl_screen["text"] = EXPRESSION  # <- display EXPRESSION.
 
 
 def on_key_press(lbl_screen, event):
@@ -36,8 +36,8 @@ def clear(lbl_screen):
     Clears the screen, and string.
     """
     global EXPRESSION
-    EXPRESSION = ""
-    lbl_screen["text"] = EXPRESSION
+    EXPRESSION = ""  # <- essentially clears EXPRESSION.
+    lbl_screen["text"] = EXPRESSION  # <- display EXPRESSION.
 
 
 def delete(lbl_screen):
@@ -46,8 +46,10 @@ def delete(lbl_screen):
     Deletes the last added character from the string.
     """
     global EXPRESSION
-    EXPRESSION = EXPRESSION[:-1]
-    lbl_screen["text"] = EXPRESSION
+    EXPRESSION = EXPRESSION[
+        :-1
+    ]  # <- this deletes the last added character from EXPRESSION.
+    lbl_screen["text"] = EXPRESSION  # <- display EXPRESSION.
 
 
 def enter(lbl_screen):
@@ -56,15 +58,20 @@ def enter(lbl_screen):
     Evaluates the expression and displays result.
     """
     global EXPRESSION
-    EXPRESSION = EXPRESSION.replace("²", "**2")
-    EXPRESSION = EXPRESSION.replace("\N{GREEK SMALL LETTER PI}", "pi")
-    EXPRESSION = EXPRESSION.replace("√", "sqrt")
+    EXPRESSION = EXPRESSION.replace("²", "**2")  # <- replace instances of '²' with **2.
+    EXPRESSION = EXPRESSION.replace(
+        "\N{GREEK SMALL LETTER PI}", "pi"
+    )  # <- replace pi symbol with 'pi'
+    EXPRESSION = EXPRESSION.replace("√", "sqrt")  # <- replace '√' with 'sqrt'.
 
-    # Catch ZeroDivisionError, SyntaxError:
+    # Catch ZeroDivisionError, SyntaxError ==>
     try:
         EXPRESSION = str(eval(EXPRESSION))
         if EXPRESSION[-1] == "0" and EXPRESSION[-2] == ".":
-            EXPRESSION = EXPRESSION[:-2]
+            # check if last characters in EXPRESSION is '.0', which is useless.
+            EXPRESSION = EXPRESSION[
+                :-2
+            ]  # <- remove last two characters from EXPRESSION.
         lbl_screen["text"] = EXPRESSION
 
     except ZeroDivisionError:
@@ -74,68 +81,77 @@ def enter(lbl_screen):
         lbl_screen["text"] = "Syntax Error"
     lbl_screen["justify"] = CENTER
 
-    EXPRESSION = EXPRESSION.replace("**2", "²")
-    EXPRESSION = EXPRESSION.replace("pi", "\N{GREEK SMALL LETTER PI}")
-    EXPRESSION = EXPRESSION.replace("sqrt", "√")
+    EXPRESSION = EXPRESSION.replace("²", "**2")  # <- replace instances of '²' with **2.
+    EXPRESSION = EXPRESSION.replace(
+        "\N{GREEK SMALL LETTER PI}", "pi"
+    )  # <- replace pi symbol with 'pi'
+    EXPRESSION = EXPRESSION.replace("√", "sqrt")  # <- replace '√' with 'sqrt'.
 
 
 def set_up_all(root):
     """Set up all widgets."""
-    lbl_screen = tk.Label(
+    # Set up the screen (display) ==>
+    lbl_screen = tk.Label(  # basic configuration -->
         root, text="", relief=SUNKEN, justify=LEFT, wraplength=250, bg="#e7f5fe"
     )
 
-    lbl_screen["font"] = "Courier 25"
-    lbl_screen.grid(row=0, columnspan=4, sticky=NSEW)
+    lbl_screen["font"] = "Courier 25"  # <- change font.
+    lbl_screen.grid(row=0, columnspan=4, sticky=NSEW)  # <- assign widget spot on grid.
 
     def btn_set_up(button, name, row, column, root, button_id="num"):
         """Set up buttons so I do not have to do them individually."""
-        my_font = font.Font(family="Helvetica", size=14)
+        my_font = font.Font(family="Helvetica", size=14)  # <- assign font.
 
-        if button_id == "zero":
+        if button_id == "zero":  # if the button is the 0 button ==>
             button = tk.Button(
-                master=root,
-                text=name,
-                relief=RAISED,
+                master=root,  # <- add button to the window.
+                text=name,  # <- set text to button's name.
+                relief=RAISED,  # <- special relief (RAISED).
+                # on click command =>
                 command=lambda: on_click(lbl_screen, button["text"]),
-                height=2,
+                height=2,  # <- set button height.
             )
+            # assign button spot on grid ->
             button.grid(row=row, column=column, columnspan=2, sticky=NSEW)
 
-        if button_id == "num":
+        if button_id == "num":  # if the button is any number that != 0 ==>
             button = tk.Button(
-                master=root,
-                text=name,
-                relief=RAISED,
+                master=root,  # add button to window.
+                text=name,  # set button text as name.
+                relief=RAISED,  # set button relief.
+                # on click command =>
                 command=lambda: on_click(lbl_screen, button["text"]),
-                height=2,
+                height=2,  # set button height.
             )
 
-        if button_id == "multiply":
+        if button_id == "multiply":  # if the button is the times (*) button ==>
             button = tk.Button(
-                master=root,
-                text=name,
-                relief=RAISED,
+                master=root,  # add button to window.
+                text=name,  # set button text as name.
+                relief=RAISED,  # set button relief.
+                # on click command ==>
                 command=lambda: on_click(lbl_screen, "*"),
-                height=2,
+                height=2,  # set button height.
             )
 
-        if button_id == "divide":
+        if button_id == "divide":  # if the button is the divide (/) button ==>
             button = tk.Button(
-                master=root,
-                text=name,
-                relief=RAISED,
+                master=root,  # add button to window.
+                text=name,  # set button text as name.
+                relief=RAISED,  # set button relief.
+                # on click command ==>
                 command=lambda: on_click(lbl_screen, "/"),
-                height=2,
+                height=2,  # set button height.
             )
 
-        if button_id == "clear":
+        if button_id == "clear":  # if the button is the clear button ==>
             button = tk.Button(
-                master=root,
-                text=name,
-                relief=RAISED,
+                master=root,  # add button to window.
+                text=name,  # set button text as name.
+                relief=RAISED,  # set button relief.
+                # on click command =>
                 command=lambda: clear(lbl_screen),
-                height=2,
+                height=2,  # set button height.
             )
 
         if button_id == "delete":
