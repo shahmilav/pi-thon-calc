@@ -100,14 +100,14 @@ def set_up_all(root):
         wraplength=250,  # set widget wraplength.
         bg="#FFFFFF",  # set widget background.
     )
-
-    lbl_screen["font"] = "Courier 24"  # <- change font.
+    label_font = font.Font(family="JetBrains Mono", size=25)
     # assign widget spot on grid -->
     lbl_screen.grid(row=0, columnspan=4, sticky=NSEW)
+    lbl_screen.configure(font=label_font)
 
     def btn_set_up(button, name, row, column, root, button_id="num"):
         """Set up buttons so I do not have to do them individually."""
-        my_font = font.Font(family="Helvetica", size=14)  # <- assign font.
+        my_font = font.Font(family="JetBrains Mono", size=14)  # assign font.
 
         if button_id == "zero":  # if the button is the 0 button ==>
             button = tk.Button(
@@ -140,7 +140,7 @@ def set_up_all(root):
                 # on click command =>
                 command=lambda: on_click(lbl_screen, "-"),
                 height=2,  # set button height.
-                )
+            )
 
         if button_id == "multiply":  # if button is the times (*) button ==>
             button = tk.Button(
@@ -170,6 +170,7 @@ def set_up_all(root):
                 # on click command =>
                 command=lambda: clear(lbl_screen),
                 height=2,  # set button height.
+                fg="#BF616A"  # set text color.
             )
 
         if button_id == "delete":  # if button is the delete button ==>
@@ -299,7 +300,7 @@ def set_up_all(root):
 
     # Clear.
     btn_clear = tk.Button()
-    btn_set_up(btn_clear, "CLEAR", 1, 2, root, button_id="clear")
+    btn_set_up(btn_clear, "Clear", 1, 2, root, button_id="clear")
 
     # Enter.
     btn_enter = tk.Button()
@@ -315,4 +316,4 @@ def set_up_all(root):
 
     # Delete.
     btn_delete = tk.Button()
-    btn_set_up(btn_delete, " DEL ", 1, 3, root, button_id="delete")
+    btn_set_up(btn_delete, " Del ", 1, 3, root, button_id="delete")

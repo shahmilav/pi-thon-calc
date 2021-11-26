@@ -12,4 +12,4 @@ root.mainloop()
 
 def on_click():
     """Print 'A'."""
-    print("A")
+    print("𝑥")
