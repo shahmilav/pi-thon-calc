@@ -60,19 +60,19 @@ def enter(lbl_screen):
     global EXPRESSION
     # replace instances of '²' with **2 -->
     EXPRESSION = EXPRESSION.replace("²", "**2")
+    # replace pi symbol with 'pi' -->
     EXPRESSION = EXPRESSION.replace(
         "\N{GREEK SMALL LETTER PI}", "pi"
-    )  # <- replace pi symbol with 'pi'
+    )
     EXPRESSION = EXPRESSION.replace("√", "sqrt")  # <- replace '√' with 'sqrt'.
 
     # Catch ZeroDivisionError, SyntaxError ==>
     try:
         EXPRESSION = str(eval(EXPRESSION))
-        if EXPRESSION[-1] == "0" and EXPRESSION[-2] == ".":
-            # check if last characters in EXPRESSION is '.0', which is useless.
-            EXPRESSION = EXPRESSION[
-                :-2
-            ]  # <- remove last two characters from EXPRESSION.
+        if EXPRESSION != "0":
+            if EXPRESSION[-1] == "0" and EXPRESSION[-2] == ".":
+                # check if last characters in EXPRESSION is '.0', which is useless.
+                EXPRESSION = EXPRESSION[:2]  # <- remove last two characters from EXPRESSION.
         lbl_screen["text"] = EXPRESSION
 
     except ZeroDivisionError:
@@ -99,7 +99,7 @@ def set_up_all(root):
         relief=SUNKEN,  # set widget relief.
         justify=LEFT,  # justify widget on left side.
         wraplength=250,  # set widget wraplength.
-        bg="#e7f5fe"  # set widget background.
+        bg="#ECECEC"  # set widget background.
     )
 
     lbl_screen["font"] = "Courier 25"  # <- change font.
@@ -213,6 +213,7 @@ def set_up_all(root):
     # Button 0.
     btn_zero = tk.Button()  # initialize button.
     btn_zero.grid(columnspan=2)  # have button take up 2 columns.
+    # info sent is widget_name, button_name, grid_placement, master, id -->
     btn_set_up(btn_zero, "0", 6, 0, root, "zero")  # send info to btn_set_up.
 
     # Button 1.
