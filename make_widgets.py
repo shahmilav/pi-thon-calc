@@ -1,7 +1,7 @@
 """Set up widgets, event handlers."""
 import tkinter as tk
 from tkinter import font
-from tkinter.constants import CENTER, LEFT, NSEW, RAISED, SUNKEN
+from tkinter.constants import CENTER, LEFT, NSEW, RAISED
 from math import sqrt, pi
 
 EXPRESSION = ""
@@ -61,9 +61,7 @@ def enter(lbl_screen):
     # replace instances of '²' with **2 -->
     EXPRESSION = EXPRESSION.replace("²", "**2")
     # replace pi symbol with 'pi' -->
-    EXPRESSION = EXPRESSION.replace(
-        "\N{GREEK SMALL LETTER PI}", "pi"
-    )
+    EXPRESSION = EXPRESSION.replace("\N{GREEK SMALL LETTER PI}", "pi")
     EXPRESSION = EXPRESSION.replace("√", "sqrt")  # <- replace '√' with 'sqrt'.
 
     # Catch ZeroDivisionError, SyntaxError ==>
@@ -71,8 +69,10 @@ def enter(lbl_screen):
         EXPRESSION = str(eval(EXPRESSION))
         if EXPRESSION != "0":
             if EXPRESSION[-1] == "0" and EXPRESSION[-2] == ".":
-                # check if last characters in EXPRESSION is '.0', which is useless.
-                EXPRESSION = EXPRESSION[:2]  # <- remove last two characters from EXPRESSION.
+                # check if last characters in EXPRESSION is '.0' =>
+                EXPRESSION = EXPRESSION[
+                    :-2
+                ]  # <- remove last two characters from EXPRESSION.
         lbl_screen["text"] = EXPRESSION
 
     except ZeroDivisionError:
@@ -96,13 +96,12 @@ def set_up_all(root):
     lbl_screen = tk.Label(  # basic configuration -->
         master=root,  # add widget to window.
         text="",  # set widget text.
-        relief=SUNKEN,  # set widget relief.
         justify=LEFT,  # justify widget on left side.
         wraplength=250,  # set widget wraplength.
-        bg="#ECECEC"  # set widget background.
+        bg="#FFFFFF",  # set widget background.
     )
 
-    lbl_screen["font"] = "Courier 25"  # <- change font.
+    lbl_screen["font"] = "Courier 24"  # <- change font.
     # assign widget spot on grid -->
     lbl_screen.grid(row=0, columnspan=4, sticky=NSEW)
 
@@ -128,14 +127,25 @@ def set_up_all(root):
                 text=name,  # set button text as name.
                 relief=RAISED,  # set button relief.
                 # on click command =>
-                command=lambda: on_click(lbl_screen, button["text"]),
+                command=lambda: on_click(lbl_screen, name),
                 height=2,  # set button height.
+                highlightbackground="#D8DEE9",  # <- set color.
             )
+
+        if button_id == "minus":  # if the button is the minus (-) button ==>
+            button = tk.Button(
+                master=root,  # add button to window.
+                text="−",  # set button text as name.
+                relief=RAISED,  # set button relief.
+                # on click command =>
+                command=lambda: on_click(lbl_screen, "-"),
+                height=2,  # set button height.
+                )
 
         if button_id == "multiply":  # if button is the times (*) button ==>
             button = tk.Button(
                 master=root,  # add button to window.
-                text=name,  # set button text as name.
+                text="×",  # set button text as name.
                 relief=RAISED,  # set button relief.
                 # on click command =>
                 command=lambda: on_click(lbl_screen, "*"),
@@ -203,14 +213,16 @@ def set_up_all(root):
             )
 
         # for all buttons => set font, highlightthickness, and grid location.
-        button.configure(highlightthickness=3, font=my_font)
+        button.configure(
+            highlightthickness=3, font=my_font, highlightbackground="#D8DEE9"
+        )
         button.grid(row=row, column=column, sticky=NSEW)
 
     # Initializing Buttons ==>
     # this part is mostly repetitive, therefore I will only comment
     # for Button 0.
 
-    # Button 0.
+    # Button 0 ==>
     btn_zero = tk.Button()  # initialize button.
     btn_zero.grid(columnspan=2)  # have button take up 2 columns.
     # info sent is widget_name, button_name, grid_placement, master, id -->
@@ -258,7 +270,8 @@ def set_up_all(root):
 
     # Minus sign.
     btn_minus = tk.Button()
-    btn_set_up(btn_minus, "-", 4, 3, root)
+    btn_set_up(btn_minus, "-", 4, 3, root, "minus")
+    btn_minus["text"] = "－"
 
     # Times sign.
     btn_times = tk.Button()
