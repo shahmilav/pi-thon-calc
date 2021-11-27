@@ -219,6 +219,9 @@ def set_up_all(root):
         )
         button.grid(row=row, column=column, sticky=NSEW)
 
+        if button_id != "clear":
+            button["fg"] = "#2E3440"
+
     # Initializing Buttons ==>
     # this part is mostly repetitive, therefore I will only comment
     # for Button 0.
