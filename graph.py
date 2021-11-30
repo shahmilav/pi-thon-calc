@@ -7,7 +7,7 @@ def graphfunc():
     x = np.linspace(-5, 5, 100)
 
     # the function, which is y = x^2 here
-    y = x**2
+    y = x
 
     # setting the axes at the center
     fig = plt.figure()
@@ -19,7 +19,7 @@ def graphfunc():
     ax.xaxis.set_ticks_position('bottom')
     ax.yaxis.set_ticks_position('left')
     # plot the function
-    plt.plot(x, y, "r", label='y=x²')
+    plt.plot(x, y, "r", label='y=x')
     plt.legend(loc='upper left')
 
     # show the plot

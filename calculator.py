@@ -10,7 +10,6 @@ class Calculator:
     """
 
     # TODO =>>
-    # Change font sizes and families.
     # Make keyboard input work
 
     root = tk.Tk()  # <- initialize window.

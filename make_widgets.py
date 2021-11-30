@@ -66,7 +66,7 @@ def enter(lbl_screen):
 
     # Catch ZeroDivisionError, SyntaxError ==>
     try:
-        EXPRESSION = str(eval(EXPRESSION))
+        EXPRESSION = str(eval(EXPRESSION))  # evaluate
         if EXPRESSION != "0":
             if EXPRESSION[-1] == "0" and EXPRESSION[-2] == ".":
                 # check if last characters in EXPRESSION is '.0' =>
@@ -82,23 +82,24 @@ def enter(lbl_screen):
         lbl_screen["text"] = "Syntax Error"
     lbl_screen["justify"] = CENTER
 
-    # replace instances of '²' with **2 ->
+    # replace '²' with **2 ->
     EXPRESSION = EXPRESSION.replace("²", "**2")
+    # replace pi symbol with 'pi' ->
     EXPRESSION = EXPRESSION.replace(
         "\N{GREEK SMALL LETTER PI}", "pi"
-    )  # <- replace pi symbol with 'pi'
+    )
     EXPRESSION = EXPRESSION.replace("√", "sqrt")  # <- replace '√' with 'sqrt'.
 
 
 def set_up_all(root):
     """Set up all widgets."""
-    # Set up the screen (display) ==>
+    # Set up the display ==>
     lbl_screen = tk.Label(  # basic configuration -->
         master=root,  # add widget to window.
         text="",  # set widget text.
         justify=LEFT,  # justify widget on left side.
         wraplength=250,  # set widget wraplength.
-        bg="#FFFFFF",  # set widget background.
+        bg='#ECEFF4',  # set widget background.
     )
     label_font = font.Font(family="JetBrains Mono", size=25)
     # assign widget spot on grid -->
@@ -170,7 +171,7 @@ def set_up_all(root):
                 # on click command =>
                 command=lambda: clear(lbl_screen),
                 height=2,  # set button height.
-                fg="#BF616A"  # set text color.
+                fg="#BF616A",  # set text color.
             )
 
         if button_id == "delete":  # if button is the delete button ==>
