@@ -17,7 +17,7 @@ class Calculator:
     # Configuring window ==>
     root.title("\N{GREEK SMALL LETTER PI}-thon Calculator")  # <- set title.
     root.resizable(False, False)  # <- set window to non-resizable.
-    root.geometry("260x350")  # <- set window size.
+    root.geometry("275x375")  # <- set window size.
     root.rowconfigure(0, minsize=50, weight=1)  # <- set rows for buttons.
     root.columnconfigure([0, 1, 2], minsize=50, weight=1)  # <- set columns.
     root.configure(background="red")  # <- set window background.
