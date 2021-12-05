@@ -108,7 +108,7 @@ def set_up_all(root):
 
     def btn_set_up(button, name, row, column, root, button_id="num"):
         """Set up buttons so I do not have to do them individually."""
-        my_font = font.Font(family="JetBrains Mono", size=14)  # assign font.
+        my_font = font.Font(family="JetBrains Mono", size=13)  # assign font.
 
         if button_id == "zero":  # if the button is the 0 button ==>
             button = tk.Button(
@@ -304,7 +304,7 @@ def set_up_all(root):
 
     # Clear.
     btn_clear = tk.Button()
-    btn_set_up(btn_clear, "Clear", 1, 2, root, button_id="clear")
+    btn_set_up(btn_clear, "CE", 1, 2, root, button_id="clear")
 
     # Enter.
     btn_enter = tk.Button()
@@ -320,4 +320,4 @@ def set_up_all(root):
 
     # Delete.
     btn_delete = tk.Button()
-    btn_set_up(btn_delete, " Del ", 1, 3, root, button_id="delete")
+    btn_set_up(btn_delete, "Del", 1, 3, root, button_id="delete")
