@@ -66,7 +66,8 @@ def enter(lbl_screen):
 
     # Catch ZeroDivisionError, SyntaxError ==>
     try:
-        EXPRESSION = str(eval(EXPRESSION))  # evaluate
+        EXPRESSION = eval(EXPRESSION)  # evaluate
+        EXPRESSION = str(round(EXPRESSION, 5))
         if EXPRESSION != "0":
             if EXPRESSION[-1] == "0" and EXPRESSION[-2] == ".":
                 # check if last characters in EXPRESSION is '.0' =>
@@ -276,7 +277,6 @@ def set_up_all(root):
     # Minus sign.
     btn_minus = tk.Button()
     btn_set_up(btn_minus, "-", 4, 3, root, "minus")
-    btn_minus["text"] = "－"
 
     # Times sign.
     btn_times = tk.Button()
