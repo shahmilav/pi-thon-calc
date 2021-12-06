@@ -4,7 +4,7 @@ from tkinter import font
 from tkinter.constants import CENTER, LEFT, NSEW, RAISED
 from math import sqrt, pi
 
-EXPRESSION = ""
+expression = ""
 
 
 def on_click(lbl_screen, value):
@@ -13,21 +13,9 @@ def on_click(lbl_screen, value):
     For any numerical, operational, or functional button, appends the value of
     the button to the string. This is for clicking buttons.
     """
-    global EXPRESSION
-    EXPRESSION += value  # <- append user_input to global value EXPRESSION.
-    lbl_screen["text"] = EXPRESSION  # <- display EXPRESSION.
-
-
-def on_key_press(lbl_screen, event):
-    """Append string.
-
-    For any numerical, operational, or functional button, appends the value of
-    the button to the string. This is for keyboard keys. Work In Progress.
-    """
-    global EXPRESSION
-    EXPRESSION += str(event.char)
-
-    lbl_screen["text"] = EXPRESSION
+    global expression
+    expression += value  # <- append user_input to global value expression.
+    lbl_screen["text"] = expression # <- display expression.
 
 
 def clear(lbl_screen):
@@ -35,9 +23,9 @@ def clear(lbl_screen):
 
     Clears the screen, and string.
     """
-    global EXPRESSION
-    EXPRESSION = ""  # <- essentially clears EXPRESSION.
-    lbl_screen["text"] = EXPRESSION  # <- display EXPRESSION.
+    global expression
+    expression = ""  # <- essentially clears expression.
+    lbl_screen["text"] = expression  # <- display expression.
 
 
 def delete(lbl_screen):
@@ -45,11 +33,11 @@ def delete(lbl_screen):
 
     Deletes the last added character from the string.
     """
-    global EXPRESSION
-    EXPRESSION = EXPRESSION[
+    global expression
+    expression = expression[
         :-1
-    ]  # <- this deletes the last added character from EXPRESSION.
-    lbl_screen["text"] = EXPRESSION  # <- display EXPRESSION.
+    ]  # <- this deletes the last added character from expression.
+    lbl_screen["text"] = expression  # <- display expression.
 
 
 def enter(lbl_screen):
@@ -57,24 +45,24 @@ def enter(lbl_screen):
 
     Evaluates the expression and displays result.
     """
-    global EXPRESSION
+    global expression
     # replace instances of '²' with **2 -->
-    EXPRESSION = EXPRESSION.replace("²", "**2")
+    expression = expression.replace("²", "**2")
     # replace pi symbol with 'pi' -->
-    EXPRESSION = EXPRESSION.replace("\N{GREEK SMALL LETTER PI}", "pi")
-    EXPRESSION = EXPRESSION.replace("√", "sqrt")  # <- replace '√' with 'sqrt'.
+    expression = expression.replace("\N{GREEK SMALL LETTER PI}", "pi")
+    expression = expression.replace("√", "sqrt")  # <- replace '√' with 'sqrt'.
 
     # Catch ZeroDivisionError, SyntaxError ==>
     try:
-        EXPRESSION = eval(EXPRESSION)  # evaluate
-        EXPRESSION = str(round(EXPRESSION, 5))
-        if EXPRESSION != "0":
-            if EXPRESSION[-1] == "0" and EXPRESSION[-2] == ".":
-                # check if last characters in EXPRESSION is '.0' =>
-                EXPRESSION = EXPRESSION[
+        expression = eval(expression)  # evaluate
+        expression = str(round(expression, 5))
+        if expression != "0":
+            if expression[-1] == "0" and expression[-2] == ".":
+                # check if last characters in expression is '.0' =>
+                expression = expression[
                     :-2
-                ]  # <- remove last two characters from EXPRESSION.
-        lbl_screen["text"] = EXPRESSION
+                ]  # <- remove last two characters from expression.
+        lbl_screen["text"] = expression
 
     except ZeroDivisionError:
         lbl_screen["text"] = "Zero Division Error"
@@ -84,12 +72,12 @@ def enter(lbl_screen):
     lbl_screen["justify"] = CENTER
 
     # replace '²' with **2 ->
-    EXPRESSION = EXPRESSION.replace("²", "**2")
+    expression = expression.replace("²", "**2")
     # replace pi symbol with 'pi' ->
-    EXPRESSION = EXPRESSION.replace(
+    expression = expression.replace(
         "\N{GREEK SMALL LETTER PI}", "pi"
     )
-    EXPRESSION = EXPRESSION.replace("√", "sqrt")  # <- replace '√' with 'sqrt'.
+    expression = expression.replace("√", "sqrt")  # <- replace '√' with 'sqrt'.
 
 
 def set_up_all(root):
