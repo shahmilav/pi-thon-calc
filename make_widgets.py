@@ -15,7 +15,7 @@ def on_click(lbl_screen, value):
     """
     global expression
     expression += value  # <- append user_input to global value expression.
-    lbl_screen["text"] = expression # <- display expression.
+    lbl_screen["text"] = expression  # <- display expression.
 
 
 def clear(lbl_screen):
@@ -69,14 +69,17 @@ def enter(lbl_screen):
 
     except SyntaxError:
         lbl_screen["text"] = "Syntax Error"
+    except TypeError:
+        lbl_screen["text"] = "Syntax Error"
+    except ValueError:
+        lbl_screen["text"] = "NaN"
+
     lbl_screen["justify"] = CENTER
 
     # replace '²' with **2 ->
     expression = expression.replace("²", "**2")
     # replace pi symbol with 'pi' ->
-    expression = expression.replace(
-        "\N{GREEK SMALL LETTER PI}", "pi"
-    )
+    expression = expression.replace("\N{GREEK SMALL LETTER PI}", "pi")
     expression = expression.replace("√", "sqrt")  # <- replace '√' with 'sqrt'.
 
 
@@ -88,7 +91,7 @@ def set_up_all(root):
         text="",  # set widget text.
         justify=LEFT,  # justify widget on left side.
         wraplength=250,  # set widget wraplength.
-        bg='#ECEFF4',  # set widget background.
+        bg="#ECEFF4",  # set widget background.
     )
     label_font = font.Font(family="JetBrains Mono", size=25)
     # assign widget spot on grid -->
