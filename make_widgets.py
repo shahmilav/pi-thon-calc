@@ -6,7 +6,6 @@ from math import sqrt, pi
 
 expression = ""
 
-
 def on_click(lbl_screen, value):
     """Append string on button click.
 
