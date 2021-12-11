@@ -1,7 +1,0 @@
-{
-    "python.linting.enabled": true,
-    "python.linting.pydocstyleEnabled": true,
-    "python.linting.pycodestyleEnabled": true,
-    "python.linting.flake8Enabled": false,
-
-}
