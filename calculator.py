@@ -20,6 +20,5 @@ class Calculator:
     root.geometry("275x375")  # <- set window size.
     root.rowconfigure(0, minsize=50, weight=1)  # <- set rows for buttons.
     root.columnconfigure([0, 1, 2], minsize=50, weight=1)  # <- set columns.
-    root.configure(background="red")  # <- set window background.
     set_up_all(root)  # <- sets up all widgets, buttons, etc.
     root.mainloop()  # <- it's showtime!
