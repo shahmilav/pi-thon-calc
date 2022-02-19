@@ -34,9 +34,8 @@ def delete(lbl_screen):
     Deletes the last added character from the string.
     """
     global expression
-    expression = expression[
-        :-1
-    ]  # <- this deletes the last added character from expression.
+    expression = expression[:
+                            -1]  # <- this deletes the last added character from expression.
     lbl_screen["text"] = expression  # <- display expression.
 
 
@@ -59,9 +58,8 @@ def enter(lbl_screen):
         if expression != "0":
             if expression[-1] == "0" and expression[-2] == ".":
                 # check if last characters in expression is '.0' =>
-                expression = expression[
-                    :-2
-                ]  # <- remove last two characters from expression.
+                expression = expression[:
+                                        -2]  # <- remove last two characters from expression.
         lbl_screen["text"] = expression
 
     except ZeroDivisionError:
@@ -207,9 +205,9 @@ def set_up_all(root):
             )
 
         # for all buttons => set font, highlightthickness, and grid location.
-        button.configure(
-            highlightthickness=3, font=my_font, highlightbackground="#D8DEE9"
-        )
+        button.configure(highlightthickness=3,
+                         font=my_font,
+                         highlightbackground="#D8DEE9")
         button.grid(row=row, column=column, sticky=NSEW)
 
         if button_id != "clear":
