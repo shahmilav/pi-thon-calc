@@ -22,7 +22,11 @@ def on_key_press(lbl_screen, event):
     """Append string.
 
     For any numerical, operational, or functional button, appends the value of
+<<<<<<< Updated upstream
     the button to the string. This is for keyboard keys. Work In Progress.
+=======
+    the button to the string. This is for keyboard keys. WorkInProgress.
+>>>>>>> Stashed changes
     """
     global EXPRESSION
     EXPRESSION += str(event.char)
